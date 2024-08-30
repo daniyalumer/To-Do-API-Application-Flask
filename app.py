@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request
 from datetime import datetime
 import hashlib
-import sys
 
 app = Flask(__name__)
 
@@ -27,8 +26,6 @@ def create_or_update_todo():
     current_time = str(datetime.now())[:-7]
     completed=request_data.get('completed', False)
 
-    print(f"Received ID: {id}", file=sys.stderr)  # Debugging: Print the received ID
-
     # mark as completed
     if completed:
         for todo in todo_list:
@@ -44,7 +41,6 @@ def create_or_update_todo():
     # update item
     if id:
         for todo in todo_list:
-            print(f"UPDATE- Received ID: {todo['id']}", file=sys.stderr) 
             if id == todo["id"]:
                 todo["id"] = generatehash(description)
                 todo["description"] = description
