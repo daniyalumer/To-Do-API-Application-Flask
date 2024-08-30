@@ -21,4 +21,5 @@ ENV FLASK_APP=app.py
 ENV FLASK_ENV=development
 
 # running the flask application
+# TODO: gunicorn
 CMD ["flask", "run", "--host=0.0.0.0"]
