@@ -19,7 +19,6 @@ def gettodos():
 
 @app.route("/todo", methods=["POST"])
 def create_or_update_todo():
-    # TODO: should be coming from the request body instead
     request_data=request.get_json()
     description = request_data.get('description')
     id = request_data.get('id', None)
@@ -35,8 +34,6 @@ def create_or_update_todo():
                 return jsonify({"message": "Item marked as completed", "todo": todo}), 200
         return jsonify({"error": "Todo item not found"}), 404
 
-    # TabularJSON.com
-    # Postman application
 
     # update item
     if id:
@@ -65,19 +62,6 @@ def create_or_update_todo():
         }
         todo_list.append(new_todo_item)
         return jsonify({'message': 'New item created in to-do list', 'todo': new_todo_item}), 201
-
-
-# this should be done in the /todo POST updation block
-""" @app.route("/completed/<string:todo_id>", methods=["POST"])
-def completed_todo_by_id(todo_id):
-    current_time = str(datetime.now())[0:7]
-    for todo in todo_list:
-        if todo["id"] == todo_id:
-            todo["completed"] = (True,)
-            todo["date_completed"] = current_time
-            return redirect(url_for("home"))
-    return jsonify({"error": "Todo item not found"}), 404 """
-
 
 
 if __name__ == "__main__":
